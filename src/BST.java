@@ -47,24 +47,76 @@ public class BST {
      * @return true if val is in the tree, false otherwise
      */
     public boolean search(int val) {
-        // TODO: Complete the search function
-        return false;
+        return binarySearch(val, root);
     }
 
+    public boolean binarySearch(int val, BSTNode node) {
+        if (node.getVal() == val) {
+            return true;
+        }
+        if (val < node.getVal())
+        {
+            if (node.getLeft() == null)
+            {
+                return false;
+            }
+            return binarySearch(val, node.getLeft());
+        }
+        else
+        {
+            if (node.getRight() == null)
+            {
+                return false;
+            }
+            return binarySearch(val, node.getRight());
+        }
+    }
     /**
      * @return ArrayList of BSTNodes in inorder
      */
     public ArrayList<BSTNode> getInorder() {
-        // TODO: Complete inorder traversal
-        return null;
+        ArrayList<BSTNode> inOrder = new ArrayList<BSTNode>();
+        inorderHelper(inOrder, root);
+        return inOrder;
+    }
+
+    public void inorderHelper(ArrayList<BSTNode> inOrder, BSTNode currentNode)
+    {
+        if (currentNode.getLeft() != null)
+        {
+            preorderHelper(inOrder, currentNode.getLeft());
+        }
+
+        inOrder.add(currentNode);
+
+        if (currentNode.getRight() != null)
+        {
+            preorderHelper(inOrder, currentNode.getRight());
+        }
     }
 
     /**
      * @return ArrayList of BSTNodes in preorder
      */
     public ArrayList<BSTNode> getPreorder() {
-        // TODO: Complete preorder traversal
-        return null;
+        ArrayList<BSTNode>  preOrder = new ArrayList<BSTNode>();
+        preorderHelper(preOrder, root);
+        return preOrder;
+    }
+
+    public void preorderHelper(ArrayList<BSTNode> preOrder, BSTNode currentNode)
+    {
+        preOrder.add(currentNode);
+
+        if (currentNode.getLeft() != null)
+        {
+            preorderHelper(preOrder, currentNode.getLeft());
+        }
+
+        if (currentNode.getRight() != null)
+        {
+            preorderHelper(preOrder, currentNode.getRight());
+        }
     }
 
     /**
